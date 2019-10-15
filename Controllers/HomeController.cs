@@ -18,5 +18,11 @@ namespace StudentMvc.Controllers
         public string Index(){
             return _IStudentRepository.GetStudent(1).Name;
         }
+        public ViewResult Details(){
+            Student model= _IStudentRepository.GetStudent(1);
+            ViewBag.Student=model;
+            ViewBag.Title="Student Details";
+            return View();
+        }
     }
 }

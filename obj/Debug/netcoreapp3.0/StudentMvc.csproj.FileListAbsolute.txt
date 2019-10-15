@@ -33,3 +33,4 @@ c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\StudentMvc.V
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\StudentMvc.dll
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\StudentMvc.pdb
 C:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\StudentMvc.csproj.CopyComplete
+c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Home\Details.cshtml.g.cs

@@ -22,9 +22,11 @@ namespace StudentMvc.Controllers
         //     Student model=_IStudentRepository.GetStudent(1);
         //     return Json(model);
         // }
-        public ObjectResult Details(){
+        public ViewResult Details(){
             Student model= _IStudentRepository.GetStudent(1);
-            return new ObjectResult(model);
+            ViewData["Student"]=model;
+            ViewData["Title"]="Student Details";
+            return View();
         }
     }
 }

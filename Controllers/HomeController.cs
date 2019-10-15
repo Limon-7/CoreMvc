@@ -18,5 +18,13 @@ namespace StudentMvc.Controllers
         public string Index(){
             return _IStudentRepository.GetStudent(1).Name;
         }
+        // public JsonResult Details(){
+        //     Student model=_IStudentRepository.GetStudent(1);
+        //     return Json(model);
+        // }
+        public ObjectResult Details(){
+            Student model= _IStudentRepository.GetStudent(1);
+            return new ObjectResult(model);
+        }
     }
 }

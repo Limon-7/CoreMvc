@@ -14,6 +14,12 @@ namespace StudentMvc.Models
                 new Student(){Id=4,Name="Nion",Email="nionbd7@gmail.com",Department="BCE"},
             };
         }
+
+        public IEnumerable<Student> GetAllStudent()
+        {
+            return _studentList;
+        }
+
         public Student GetStudent(int Id)
         {
             return _studentList.FirstOrDefault(e=>e.Id==Id);

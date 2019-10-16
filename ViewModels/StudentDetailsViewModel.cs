@@ -6,5 +6,6 @@ namespace StudentMvc.ViewModels
     {
         public Student Student{get;set;}
         public string Title{get;set;}
+         
     }
 }

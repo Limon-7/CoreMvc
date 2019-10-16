@@ -11,13 +11,14 @@ namespace StudentMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private IStudentRepository _IStudentRepository;
+        private readonly IStudentRepository _IStudentRepository;
 
         public HomeController(IStudentRepository IStudentRepository){
             _IStudentRepository=IStudentRepository;
         }
-        public string Index(){
-            return _IStudentRepository.GetStudent(1).Name;
+        public ViewResult Index(){
+            var model=_IStudentRepository.GetAllStudent();
+            return View(model);
         }
         public ViewResult Details(){
             StudentDetailsViewModel studentViewModelDetails= new StudentDetailsViewModel(){

@@ -17,8 +17,8 @@ namespace StudentMvc.Controllers
             _IStudentRepository=IStudentRepository;
         }
         public ViewResult Index(){
-            var stu=_IStudentRepository.GetAllStudent();
-            return View(stu);
+            var student=_IStudentRepository.GetAllStudent();
+            return View(student);
         }
         public ViewResult Details(){
             StudentDetailsViewModel studentViewModelDetails= new StudentDetailsViewModel(){

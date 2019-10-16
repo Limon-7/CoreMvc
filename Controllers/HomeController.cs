@@ -23,7 +23,7 @@ namespace StudentMvc.Controllers
         public ViewResult Details(){
             StudentDetailsViewModel studentViewModelDetails= new StudentDetailsViewModel(){
                 Student=_IStudentRepository.GetStudent(3),
-                Title="Student Details"
+                Title="Student Details Information"
             };
              return View(studentViewModelDetails);
         }

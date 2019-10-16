@@ -14364,6 +14364,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views\\Home\\_ViewStart.cshtml",
+      "TargetPath": "Views\\Home\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views\\Shared\\_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"

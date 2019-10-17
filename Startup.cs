@@ -43,9 +43,11 @@ namespace StudentMvc
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
 
-            app.UseRouting();
-
+            // app.UseMvc(routes=>{
+            //     routes.MapRoute("default","{conroller}/{action}/{id}");
+            // });
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

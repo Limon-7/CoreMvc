@@ -20,9 +20,9 @@ namespace StudentMvc.Controllers
             var student=_IStudentRepository.GetAllStudent();
             return View(student);
         }
-        public ViewResult Details(){
+        public ViewResult Details(int id){
             StudentDetailsViewModel studentViewModelDetails= new StudentDetailsViewModel(){
-                Student=_IStudentRepository.GetStudent(3),
+                Student=_IStudentRepository.GetStudent(id),
                 Title="Student Details"
             };
              return View(studentViewModelDetails);

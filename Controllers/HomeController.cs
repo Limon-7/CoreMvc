@@ -9,6 +9,7 @@ using StudentMvc.ViewModels;
 
 namespace StudentMvc.Controllers
 {
+    [Route("[Controller]/[Action]")]
     public class HomeController : Controller
     {
         private readonly IStudentRepository _IStudentRepository;
@@ -16,13 +17,24 @@ namespace StudentMvc.Controllers
         public HomeController(IStudentRepository IStudentRepository){
             _IStudentRepository=IStudentRepository;
         }
+       // [Route("")]
+        //[Route("Home")]
+        // [Route("Home/Index")]
+        //Action 
+        [Route("~/Home")]
+        [Route("~/")]
         public ViewResult Index(){
             var student=_IStudentRepository.GetAllStudent();
             return View(student);
         }
-        public ViewResult Details(int id){
+        //? use id parameter to make opitional and make parameter nullable
+        //id?? 1 use to set default id=1
+       // [Route("Home/Details/{id?}")]
+        [Route("{id?}")]
+
+        public ViewResult Details(int? id){
             StudentDetailsViewModel studentViewModelDetails= new StudentDetailsViewModel(){
-                Student=_IStudentRepository.GetStudent(id),
+                Student=_IStudentRepository.GetStudent(id??1),
                 Title="Student Details"
             };
              return View(studentViewModelDetails);

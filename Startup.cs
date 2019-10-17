@@ -24,7 +24,7 @@ namespace StudentMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().AddXmlDataContractSerializerFormatters();
             services.AddSingleton<IStudentRepository,MockStudentRepository>();
         }
 
@@ -43,19 +43,15 @@ namespace StudentMvc
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+            app.UseRouting();
+            //app.UseMvcWithDefaultRoute();
 
-            // app.UseMvc(routes=>{
-            //     routes.MapRoute("default","{conroller}/{action}/{id}");
-            // });
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            
+            app.UseEndpoints(routes=>{
+               routes.MapDefaultControllerRoute();
+               //routes.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
             });
+          
         }
     }
 }

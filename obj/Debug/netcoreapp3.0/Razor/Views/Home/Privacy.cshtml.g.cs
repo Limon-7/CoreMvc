@@ -20,14 +20,14 @@ using StudentMvc.Models;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "c:\Users\limon\dotnetcore\basics\StudentMvc\Views\_ViewImports.cshtml"
+#line 2 "c:\Users\limon\dotnetcore\basics\StudentMvc\Views\_ViewImports.cshtml"
 using StudentMvc.ViewModels;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d8ddb6bffa5a9b264bf8f89038bf03c234083fd3", @"/Views/Home/Privacy.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ca473a566e1a2993f148f6f010bb6cc4613886d8", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"971f2e4e59acc0a6c3588d23b7bc2d922266b8e8", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Privacy : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

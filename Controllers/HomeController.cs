@@ -23,11 +23,12 @@ namespace StudentMvc.Controllers
         //Action 
         [Route("~/Home")]
         [Route("~/")]
+        [Route("")]
         public ViewResult Index(){
             var student=_IStudentRepository.GetAllStudent();
             return View(student);
         }
-        //? use id parameter to make opitional and make parameter nullable
+        //? use id parameter to make optional and make parameter nullable
         //id?? 1 use to set default id=1
        // [Route("Home/Details/{id?}")]
         [Route("{id?}")]

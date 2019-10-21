@@ -8,11 +8,18 @@ namespace StudentMvc.Models
         private List<Student> _studentList;
         public MockStudentRepository(){
             _studentList=new List<Student>{
-                new Student(){Id=1,Name="Limon",Email="liibd7@gmail.com",Department="BCSE"},
-                new Student(){Id=2,Name="Sam",Email="Sambd7@gmail.com",Department="BEEE"},
-                new Student(){Id=3,Name="Oyon",Email="Oionbd7@gmail.com",Department="BMC"},
-                new Student(){Id=4,Name="Nion",Email="nionbd7@gmail.com",Department="BCE"},
+                new Student(){Id=1,Name="Limon",Email="liibd7@gmail.com",Department=Dept.Cse},
+                new Student(){Id=2,Name="Sam",Email="Sambd7@gmail.com",Department=Dept.Mec},
+                new Student(){Id=3,Name="Oyon",Email="Oionbd7@gmail.com",Department=Dept.Cse},
+                new Student(){Id=4,Name="Nion",Email="nionbd7@gmail.com",Department=Dept.None},
             };
+        }
+
+        public Student Add(Student student)
+        {
+            student.Id=_studentList.Max(i=>i.Id)+1;
+            _studentList.Add(student);
+            return student;
         }
 
         public IEnumerable<Student> GetAllStudent()

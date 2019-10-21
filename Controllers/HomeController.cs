@@ -41,5 +41,20 @@ namespace StudentMvc.Controllers
              return View(studentViewModelDetails);
         }
 
+        [Route("")]
+        [HttpGet]
+        public ViewResult Create(){
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Student stu){
+            if(ModelState.IsValid){
+                
+           Student newStudent=_IStudentRepository.Add(stu);
+           return RedirectToAction("Details",new {newStudent.Id});
+        }
+        return View();
+        }
+
     }
 }

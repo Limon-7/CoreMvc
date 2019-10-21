@@ -13,9 +13,7 @@
             <img class="card-img-top" src="~/images/student.jpg" asp-append-version="true" />
             <div class="card-footer text-center">
                 <a asp-controller="Home" asp-action="Details" asp-route-id="@student.Id" class="btn btn-primary">View</a>
-                @Html.ActionLink("View", "details", new { id = student.Id})
-
-                <a href="@Url.Action("Details","Home", new{id=student.Id})" class="btn btn-primary">Edit</a>
+                <a  asp-controller="Home" asp-action="Details" asp-route-id="@student.Id" class="btn btn-primary">Edit</a>
                 <a href="#" class="btn btn-danger">Delete</a>
             </div>
         </div>

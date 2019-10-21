@@ -6,5 +6,6 @@ namespace StudentMvc.Models
     {
         Student GetStudent(int Id);
         IEnumerable<Student>GetAllStudent();
+        Student Add(Student student);
     }
 }

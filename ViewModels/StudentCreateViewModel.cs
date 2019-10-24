@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+using StudentMvc.Models;
 
-namespace StudentMvc.Models
+namespace StudentMvc.ViewModels
 {
-    public class Student
+    public class StudentCreateViewModel
     {
-        public int Id{get;set;}
         [Required,MaxLength(50,ErrorMessage="Name can not be exceed 50 charecters"),MinLength(3,ErrorMessage="Name Must be at least 3 charecters")]
         public string Name{get;set;}
         [Required]
@@ -13,6 +14,6 @@ namespace StudentMvc.Models
         public string Email{get;set;}
         [Required(ErrorMessage="Please Select A value")]
         public Dept? Department{get;set;}
-        public string PhotoPath{get;set;}
+        public IFormFile Photo{get;set;}
     }
 }

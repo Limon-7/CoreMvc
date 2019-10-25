@@ -89,7 +89,23 @@ namespace StudentMvc.Controllers
             }
             return View();
         }
+    
+        [HttpGet]
+        public IActionResult Edit(int id){
+            Student student=_IStudentRepository.GetStudent(id);
+            StudentEditViewModel studentEditViewModel=new StudentEditViewModel{
+                Id=student.Id,
+                Name=student.Name,
+                Email=student.Email,
+                Department=student.Department,
+                ExistingPhotopath=student.PhotoPath
+            };
+            return View(studentEditViewModel);
+        }
+        [HttpPost]
+        public IActionResult Edit(){
 
-
+            return View();
+        }
     }
 }

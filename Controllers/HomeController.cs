@@ -14,7 +14,7 @@ namespace StudentMvc.Controllers
         private readonly IStudentRepository _IStudentRepository;
         private readonly IWebHostEnvironment _iWebHosting;
 
-        public HomeController(IStudentRepository IStudentRepository,  IWebHostEnvironment iWebHosting)
+        public HomeController(IStudentRepository IStudentRepository, IWebHostEnvironment iWebHosting)
         {
             _IStudentRepository = IStudentRepository;
             this._iWebHosting = iWebHosting;
@@ -57,55 +57,120 @@ namespace StudentMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniquePhoto = null;
-                if(stu.Photo!=null && stu.Photo.Count>0){
-                     foreach (IFormFile photo in stu.Photo)
-                    {
-                        string uploadsFolder = Path.Combine(_iWebHosting.WebRootPath, "images");
-                        uniquePhoto = Guid.NewGuid().ToString() + "_" + photo.FileName;
-                        string filePath = Path.Combine(uploadsFolder, uniquePhoto);
-                        photo.CopyTo(new FileStream(filePath, FileMode.Create));
-                    }
- 
-                }
-
-                //For single file upload
-                // if (stu.Photo != null)
-                // {
-                //     string uploadsFolder = Path.Combine(_iWebHosting.WebRootPath, "images");
-                //     uniquePhoto = Guid.NewGuid().ToString() + "_" + stu.Photo.FileName;
-                //     string filePath = Path.Combine(uploadsFolder, uniquePhoto);
-                //     stu.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
-
-                // }
-                Student newStudent = new Student{
-                    Name=stu.Name,
-                    Email=stu.Email,
-                    Department=stu.Department,
-                    PhotoPath=uniquePhoto
+                string uniquePhoto = ProcessUploadFile(stu);
+                Student newStudent = new Student
+                {
+                    Name = stu.Name,
+                    Email = stu.Email,
+                    Department = stu.Department,
+                    PhotoPath = uniquePhoto
                 };
                 _IStudentRepository.Add(newStudent);
                 return RedirectToAction("Details", new { newStudent.Id });
             }
             return View();
         }
-    
+
         [HttpGet]
-        public IActionResult Edit(int id){
-            Student student=_IStudentRepository.GetStudent(id);
-            StudentEditViewModel studentEditViewModel=new StudentEditViewModel{
-                Id=student.Id,
-                Name=student.Name,
-                Email=student.Email,
-                Department=student.Department,
-                ExistingPhotopath=student.PhotoPath
+        public IActionResult Edit(int id)
+        {
+            Student student = _IStudentRepository.GetStudent(id);
+            StudentEditViewModel studentEditViewModel = new StudentEditViewModel
+            {
+                Id = student.Id,
+                Name = student.Name,
+                Email = student.Email,
+                Department = student.Department,
+                ExistingPhotoPath = student.PhotoPath
             };
             return View(studentEditViewModel);
         }
         [HttpPost]
-        public IActionResult Edit(){
+        public IActionResult Edit(StudentEditViewModel editViewModel)
+        {
+            /* 
+            if (ModelState.IsValid)
+            {
+                // Retrieve the employee being edited from the database
+                Student student = _IStudentRepository.GetStudent(editViewModel.Id);
+                // Update the employee object with the data in the model object
+                student.Name = editViewModel.Name;
+                student.Email = editViewModel.Email;
+                student.Department = editViewModel.Department;
 
-            return View();
+                // If the user wants to change the photo, a new photo will be
+                // uploaded and the Photo property on the model object receives
+                // the uploaded photo. If the Photo property is null, user did
+                // not upload a new photo and keeps his existing photo
+                if (editViewModel.Photo != null)
+                {
+                    // If a new photo is uploaded, the existing photo must be
+                    // deleted. So check if there is an existing photo and delete
+                    if (editViewModel.ExistingPhotoPath != null)
+                    {
+                        string filePath = Path.Combine(_iWebHosting.WebRootPath,
+                            "images", editViewModel.ExistingPhotoPath);
+                        System.IO.File.Delete(filePath);
+                    }
+                    // Save the new photo in wwwroot/images folder and update
+                    // PhotoPath property of the employee object which will be
+                    // eventually saved in the database
+                    student.PhotoPath = ProcessUploadFile(editViewModel);
+                }
+
+                // Call update method on the repository service passing it the
+                // employee object to update the data in the database table
+                Student upDateStudent = _IStudentRepository.Update(student);
+
+                return RedirectToAction("index");
+            }
+
+            return View(editViewModel);
+        }*/
+
+            if(ModelState.IsValid){
+             Student student = _IStudentRepository.GetStudent(editViewModel.Id);
+             student.Name=editViewModel.Name;
+             student.Email=editViewModel.Email;
+             student.Department=editViewModel.Department;
+             if(editViewModel.Photo!=null){
+                 if(editViewModel.ExistingPhotoPath!=null){
+                     string filePath = Path.Combine(_iWebHosting.WebRootPath, "images", editViewModel.ExistingPhotoPath);
+                     System.IO.File.Delete(filePath);
+                 }
+                  student.PhotoPath = ProcessUploadFile(editViewModel);
+             }
+             Student upDateStudent = _IStudentRepository.Update(student);
+             return RedirectToAction("Index");
+         }
+
+             return View(editViewModel);
+         }
+        private string ProcessUploadFile(StudentCreateViewModel stu)
+        {
+            string uniquePhoto = null;
+            /* Multiple file upload And In modelcreate view Class List<IFormFile> must be generic  
+            if(stu.Photo!=null && stu.Photo.Count>0){
+                 foreach (IFormFile photo in stu.Photo)
+                {
+                    string uploadsFolder = Path.Combine(_iWebHosting.WebRootPath, "images");
+                    uniquePhoto = Guid.NewGuid().ToString() + "_" + photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniquePhoto);
+                    photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+            }*/
+
+            //For single file upload
+            if (stu.Photo != null)
+            {
+                string uploadsFolder = Path.Combine(_iWebHosting.WebRootPath, "images");
+                uniquePhoto = Guid.NewGuid().ToString() + "_" + stu.Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniquePhoto);
+                stu.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+
+            }
+            return uniquePhoto;
         }
     }
 }

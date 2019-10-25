@@ -1,11 +1,11 @@
 @model StudentEditViewModel
 @{
     ViewData["Title"]="Edit Student Model";
-    var photoPath="~/images/"+(Model.ExistingPhotopath?? "student.jpg");
+    var photoPath="~/images/"+(Model.ExistingPhotoPath?? "student.jpg");
 }
 <form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" method="post" class="mt-3">
     <input hidden asp-for="Id"/>
-    <input hidden asp-for="ExistingPhotopath"/>
+    <input hidden asp-for="ExistingPhotoPath"/>
 
     <div class="form-group row">
         <label asp-for="Name" class="col-sm-2 col-form-label"></label>

@@ -22,14 +22,34 @@ namespace StudentMvc.Models
             return student;
         }
 
+        public Student Delete(int id)
+        {
+            Student student=_studentList.FirstOrDefault(d=>d.Id==id);
+            if(student!=null){
+                _studentList.Remove(student);
+            }
+            return student;
+        }
+
         public IEnumerable<Student> GetAllStudent()
         {
             return _studentList;
         }
 
-        public Student GetStudent(int Id)
+        public Student GetStudent(int id)
         {
-            return _studentList.FirstOrDefault(e=>e.Id==Id);
+            return _studentList.FirstOrDefault(e=>e.Id==id);
+        }
+
+        public Student Update(Student updatechanges)
+        {
+            Student student=_studentList.FirstOrDefault(u=>u.Id==updatechanges.Id);
+            if(student!=null){
+                student.Name=updatechanges.Name;
+                student.Email=updatechanges.Email;
+                student.Department=updatechanges.Department;
+            }
+            return student;
         }
     }
 }

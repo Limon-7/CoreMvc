@@ -27,7 +27,7 @@ namespace StudentMvc
         {
             services.AddDbContextPool<StudentMvcContext>(db=>db.UseSqlite(Configuration.GetConnectionString("StudentMvcDB")));
             services.AddMvc().AddXmlDataContractSerializerFormatters();
-            services.AddSingleton<IStudentRepository,MockStudentRepository>();
+            services.AddScoped<IStudentRepository,SqliteStudentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

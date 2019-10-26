@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -38,9 +39,14 @@ namespace StudentMvc.Controllers
 
         public ViewResult Details(int? id)
         {
+            Student student=_IStudentRepository.GetStudent(id.Value);
+            if(student==null){
+                Response.StatusCode=404;
+                return View("StudentNotFound",id.Value);
+            }
             StudentDetailsViewModel studentViewModelDetails = new StudentDetailsViewModel()
             {
-                Student = _IStudentRepository.GetStudent(id ?? 1),
+                Student = student,
                 Title = "Student Details"
             };
             return View(studentViewModelDetails);
@@ -171,6 +177,18 @@ namespace StudentMvc.Controllers
 
             }
             return uniquePhoto;
+        }
+    
+       public IActionResult Error(int statusCode)
+        {
+            switch (statusCode)
+            {
+                case 404:
+                    ViewBag.ErrorMessage = "Sorry, the resource you requested could not be found";
+                    break;
+            }
+
+            return View("NotFound");
         }
     }
 }

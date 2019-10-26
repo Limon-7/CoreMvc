@@ -22,7 +22,6 @@ c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\StudentMvc.T
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\StudentMvc.RazorCoreGenerate.cache
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Home\Index.cshtml.g.cs
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Home\Privacy.cshtml.g.cs
-c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Shared\Error.cshtml.g.cs
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
@@ -148,3 +147,5 @@ C:\Users\limon\dotnetcore\basics\StudentMvc\bin\Debug\netcoreapp3.0\runtimes\uni
 C:\Users\limon\dotnetcore\basics\StudentMvc\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\limon\dotnetcore\basics\StudentMvc\bin\Debug\netcoreapp3.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Home\Edit.cshtml.g.cs
+c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Home\StudentNotFound.cshtml.g.cs
+c:\Users\limon\dotnetcore\basics\StudentMvc\obj\Debug\netcoreapp3.0\Razor\Views\Shared\NotFound.cshtml.g.cs

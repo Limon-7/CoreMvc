@@ -39,19 +39,20 @@ namespace StudentMvc
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+               //app.UseStatusCodePagesWithReExecute("Error/{0}");
+               app.UseExceptionHandler("/Error");
+                // // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+               app.UseHsts();
             }
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
             //app.UseMvcWithDefaultRoute();
 
             
             app.UseEndpoints(routes=>{
-               routes.MapDefaultControllerRoute();
-               //routes.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
+              // routes.MapDefaultControllerRoute();
+               routes.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
             });
           
         }

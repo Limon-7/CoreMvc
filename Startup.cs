@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +26,10 @@ namespace StudentMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<StudentMvcContext>(db=>db.UseSqlite(Configuration.GetConnectionString("StudentMvcDB")));
+            services.AddDbContext<StudentMvcContext>(db=>db.UseSqlite(Configuration.GetConnectionString("StudentMvcDB")));
+
+            
+            services.AddControllersWithViews();
             services.AddMvc().AddXmlDataContractSerializerFormatters();
             services.AddScoped<IStudentRepository,SqliteStudentRepository>();
         }
@@ -43,12 +47,18 @@ namespace StudentMvc
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthentication();
+            // app.UseHttpsRedirection();
+            // app.UseStaticFiles();
+            // app.UseRouting();
+            // app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
+             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
             
             app.UseEndpoints(routes=>{
                routes.MapDefaultControllerRoute();

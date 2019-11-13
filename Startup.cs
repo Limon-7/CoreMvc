@@ -46,6 +46,7 @@ namespace StudentMvc
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
 
             

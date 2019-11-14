@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,15 @@ namespace StudentMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<StudentMvcContext>(db=>db.UseSqlite(Configuration.GetConnectionString("StudentMvcDB")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options=>{
+                options.Password.RequiredLength=10;
+                options.Password.RequiredUniqueChars=3;
+                options.Password.RequireNonAlphanumeric=false;
+                options.Password.RequireDigit=false;
+                options.Password.RequireUppercase=false;
+            }).AddEntityFrameworkStores<StudentMvcContext>();
+
             services.AddMvc().AddXmlDataContractSerializerFormatters();
             services.AddScoped<IStudentRepository,SqliteStudentRepository>();
         }
@@ -47,7 +57,7 @@ namespace StudentMvc
             app.UseStaticFiles();
             app.UseRouting();
             //app.UseMvcWithDefaultRoute();
-
+            app.UseAuthentication();
             
             app.UseEndpoints(routes=>{
                routes.MapDefaultControllerRoute();

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StudentMvc.ViewModels
 {
@@ -6,6 +7,7 @@ namespace StudentMvc.ViewModels
     {
         [Required]
         [EmailAddress]
+        [Remote(action:"IsEmailAlreadyTake",controller:"Account")]
         public string Email { get; set; }
 
         [Required]

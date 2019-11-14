@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,7 @@ namespace StudentMvc.Controllers
         [Route("~/Home")]
         [Route("~/")]
         [Route("")]
+        [AllowAnonymous]
         public ViewResult Index()
         {
             var student = _IStudentRepository.GetAllStudent();
@@ -36,6 +38,7 @@ namespace StudentMvc.Controllers
         // [Route("Home/Details/{id?}")]
         [Route("{id?}")]
 
+        [AllowAnonymous]
         public ViewResult Details(int? id)
         {
             StudentDetailsViewModel studentViewModelDetails = new StudentDetailsViewModel()

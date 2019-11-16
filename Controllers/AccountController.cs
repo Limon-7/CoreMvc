@@ -2,16 +2,17 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using StudentMvc.Models;
 using StudentMvc.ViewModels;
 
 namespace StudentMvc.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -30,15 +31,17 @@ namespace StudentMvc.Controllers
             return View();
         }
 
-        [AcceptVerbs("Get","Post")]
+        [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> IsEmailAlreadyTake(string email)
         {
-            var user= await _userManager.FindByEmailAsync(email);
-            if(user==null){
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
                 return Json(true);
             }
-            else{
+            else
+            {
                 return Json($"{email} is already in use");
             }
         }
@@ -49,7 +52,7 @@ namespace StudentMvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser()
+                var user = new User()
                 {
                     UserName = model.Email,
                     Email = model.Email
@@ -58,6 +61,10 @@ namespace StudentMvc.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if(_signInManager.IsSignedIn(User)&& User.IsInRole("Admin")){
+                        
+                        return RedirectToAction("ListUsers","Administration");
+                    }
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
@@ -83,19 +90,28 @@ namespace StudentMvc.Controllers
             if (ModelState.IsValid)
             {
                 //Store user data in AspNetUsers database table 
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,model.RememberMe,false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if(!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl)){
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
                         return Redirect(returnUrl);
                     }
-                    else{
+                    else
+                    {
                         return RedirectToAction("Index", "Home");
                     }
                 }
                 ModelState.AddModelError("", "Invalid Login");
             }
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
     }
 }

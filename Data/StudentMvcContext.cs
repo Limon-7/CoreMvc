@@ -4,7 +4,7 @@ using StudentMvc.Data;
 
 namespace StudentMvc.Models
 {
-    public class StudentMvcContext : IdentityDbContext {
+    public class StudentMvcContext : IdentityDbContext<User> {
         public StudentMvcContext (DbContextOptions<StudentMvcContext> options) : base (options) { }
         public DbSet<Student> Students { get; set; }
 

@@ -41,9 +41,14 @@ namespace StudentMvc.Controllers
         [AllowAnonymous]
         public ViewResult Details(int? id)
         {
+            Student student= _IStudentRepository.GetStudent(id.Value);
+            if(student==null){
+                Response.StatusCode=404;
+                return View("StudentNotFound",id.Value);
+            }
             StudentDetailsViewModel studentViewModelDetails = new StudentDetailsViewModel()
             {
-                Student = _IStudentRepository.GetStudent(id ?? 1),
+                Student = student,
                 Title = "Student Details"
             };
             return View(studentViewModelDetails);

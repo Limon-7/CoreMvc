@@ -30,8 +30,8 @@ namespace StudentMvc
         {
             services.AddDbContextPool<StudentMvcContext>(db=>db.UseSqlite(Configuration.GetConnectionString("StudentMvcDB")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options=>{
-                options.Password.RequiredLength=10;
+            services.AddIdentity<User, IdentityRole>(options=>{
+                options.Password.RequiredLength=4;
                 options.Password.RequiredUniqueChars=3;
                 options.Password.RequireNonAlphanumeric=false;
                 options.Password.RequireDigit=false;
@@ -56,7 +56,8 @@ namespace StudentMvc
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseStatusCodePages();
+               // app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -65,6 +66,7 @@ namespace StudentMvc
             app.UseRouting();
             //app.UseMvcWithDefaultRoute();
             app.UseAuthentication();
+            app.UseAuthorization();
             
             app.UseEndpoints(routes=>{
                routes.MapDefaultControllerRoute();

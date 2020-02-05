@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,23 +29,26 @@ namespace StudentMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<StudentMvcContext>(db=>db.UseSqlite(Configuration.GetConnectionString("StudentMvcDB")));
+            services.AddDbContextPool<StudentMvcContext>(db => db.UseSqlite(Configuration.GetConnectionString("StudentMvcDB")));
 
-            services.AddIdentity<User, IdentityRole>(options=>{
-                options.Password.RequiredLength=4;
-                options.Password.RequiredUniqueChars=3;
-                options.Password.RequireNonAlphanumeric=false;
-                options.Password.RequireDigit=false;
-                options.Password.RequireUppercase=false;
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequiredUniqueChars = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
             }).AddEntityFrameworkStores<StudentMvcContext>();
 
-            services.AddMvc(options=>{
-                var policy=new AuthorizationPolicyBuilder()
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
                 .RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             })
             .AddXmlDataContractSerializerFormatters();
-            services.AddScoped<IStudentRepository,SqliteStudentRepository>();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IStudentRepository, SqliteStudentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,8 +61,6 @@ namespace StudentMvc
             else
             {
                 app.UseStatusCodePages();
-               // app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -67,12 +69,13 @@ namespace StudentMvc
             //app.UseMvcWithDefaultRoute();
             app.UseAuthentication();
             app.UseAuthorization();
-            
-            app.UseEndpoints(routes=>{
-               routes.MapDefaultControllerRoute();
-               //routes.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
+
+            app.UseEndpoints(routes =>
+            {
+                routes.MapDefaultControllerRoute();
+                //routes.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}");
             });
-          
+
         }
     }
 }

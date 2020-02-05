@@ -33,6 +33,7 @@ namespace StudentMvc.Controllers
             var student = _IStudentRepository.GetAllStudent();
             return View(student);
         }
+
         //? use id parameter to make optional and make parameter nullable
         //id?? 1 use to set default id=1
         // [Route("Home/Details/{id?}")]
@@ -41,10 +42,11 @@ namespace StudentMvc.Controllers
         [AllowAnonymous]
         public ViewResult Details(int? id)
         {
-            Student student= _IStudentRepository.GetStudent(id.Value);
-            if(student==null){
-                Response.StatusCode=404;
-                return View("StudentNotFound",id.Value);
+            Student student = _IStudentRepository.GetStudent(id.Value);
+            if (student == null)
+            {
+                Response.StatusCode = 404;
+                return View("StudentNotFound", id.Value);
             }
             StudentDetailsViewModel studentViewModelDetails = new StudentDetailsViewModel()
             {
@@ -136,24 +138,27 @@ namespace StudentMvc.Controllers
             return View(editViewModel);
         }*/
 
-            if(ModelState.IsValid){
-             Student student = _IStudentRepository.GetStudent(editViewModel.Id);
-             student.Name=editViewModel.Name;
-             student.Email=editViewModel.Email;
-             student.Department=editViewModel.Department;
-             if(editViewModel.Photo!=null){
-                 if(editViewModel.ExistingPhotoPath!=null){
-                     string filePath = Path.Combine(_iWebHosting.WebRootPath, "images", editViewModel.ExistingPhotoPath);
-                     System.IO.File.Delete(filePath);
-                 }
-                  student.PhotoPath = ProcessUploadFile(editViewModel);
-             }
-             Student upDateStudent = _IStudentRepository.Update(student);
-             return RedirectToAction("Index");
-         }
+            if (ModelState.IsValid)
+            {
+                Student student = _IStudentRepository.GetStudent(editViewModel.Id);
+                student.Name = editViewModel.Name;
+                student.Email = editViewModel.Email;
+                student.Department = editViewModel.Department;
+                if (editViewModel.Photo != null)
+                {
+                    if (editViewModel.ExistingPhotoPath != null)
+                    {
+                        string filePath = Path.Combine(_iWebHosting.WebRootPath, "images", editViewModel.ExistingPhotoPath);
+                        System.IO.File.Delete(filePath);
+                    }
+                    student.PhotoPath = ProcessUploadFile(editViewModel);
+                }
+                Student upDateStudent = _IStudentRepository.Update(student);
+                return RedirectToAction("Index");
+            }
 
-             return View(editViewModel);
-         }
+            return View(editViewModel);
+        }
         private string ProcessUploadFile(StudentCreateViewModel stu)
         {
             string uniquePhoto = null;

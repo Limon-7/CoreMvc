@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\limon\\dotnetcore\\basics\\StudentMvc\\StudentMvc.csproj": {}
+    "C:\\Users\\limon\\dotnetcore\\CoreMvc\\StudentMvc.csproj": {}
   },
   "projects": {
-    "C:\\Users\\limon\\dotnetcore\\basics\\StudentMvc\\StudentMvc.csproj": {
+    "C:\\Users\\limon\\dotnetcore\\CoreMvc\\StudentMvc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\limon\\dotnetcore\\basics\\StudentMvc\\StudentMvc.csproj",
+        "projectUniqueName": "C:\\Users\\limon\\dotnetcore\\CoreMvc\\StudentMvc.csproj",
         "projectName": "StudentMvc",
-        "projectPath": "C:\\Users\\limon\\dotnetcore\\basics\\StudentMvc\\StudentMvc.csproj",
+        "projectPath": "C:\\Users\\limon\\dotnetcore\\CoreMvc\\StudentMvc.csproj",
         "packagesPath": "C:\\Users\\limon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\limon\\dotnetcore\\basics\\StudentMvc\\obj\\",
+        "outputPath": "C:\\Users\\limon\\dotnetcore\\CoreMvc\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\limon\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -71,6 +71,16 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.0.1, 3.0.1]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.0.2, 3.0.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -79,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
